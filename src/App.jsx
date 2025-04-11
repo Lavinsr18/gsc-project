@@ -1,35 +1,70 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+export default function Dashboard() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="min-h-screen bg-gray-100 p-6 font-sans">
+      <header className="bg-white shadow-md p-4 mb-6">
+        <h1 className="text-2xl font-semibold text-gray-800">
+          Search Console Dashboard
+        </h1>
+      </header>
 
-export default App
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        {[
+          { label: "Total Clicks", value: "--" },
+          { label: "Impressions", value: "--" },
+          { label: "Average CTR", value: "--" },
+          { label: "Average Position", value: "--" },
+        ].map((item, idx) => (
+          <div key={idx} className="bg-white p-4 rounded-2xl shadow-md">
+            <h2 className="text-sm text-gray-500 mb-1">{item.label}</h2>
+            <p className="text-xl font-bold text-gray-800">{item.value}</p>
+          </div>
+        ))}
+      </section>
+
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold">Performance Report</h2>
+        <select className="p-2 border border-gray-300 rounded-lg">
+          <option>Last 7 days</option>
+          <option>Last 28 days</option>
+          <option>Last 90 days</option>
+        </select>
+      </div>
+
+      <div className="bg-white rounded-2xl shadow-md overflow-x-auto">
+        <table className="min-w-full table-auto">
+          <thead className="bg-gray-50">
+            <tr>
+              <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">
+                Query
+              </th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">
+                Clicks
+              </th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">
+                Impressions
+              </th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">
+                CTR
+              </th>
+              <th className="text-left px-6 py-3 text-sm font-medium text-gray-500">
+                Position
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-t">
+              <td className="px-6 py-4 text-sm text-gray-800">--</td>
+              <td className="px-6 py-4 text-sm text-gray-800">--</td>
+              <td className="px-6 py-4 text-sm text-gray-800">--</td>
+              <td className="px-6 py-4 text-sm text-gray-800">--</td>
+              <td className="px-6 py-4 text-sm text-gray-800">--</td>
+            </tr>
+            {/* Data rows will go here */}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
