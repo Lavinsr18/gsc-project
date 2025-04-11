@@ -1,42 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
 
 function App() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:5000/api/gsc')
-      .then(res => res.json())
-      .then(setData)
-      .catch(err => console.error('Failed to fetch:', err));
-  }, []);
+  const [count, setCount] = useState(0)
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Search Console Data</h2>
-      <table border="1" cellPadding={10}>
-        <thead>
-          <tr>
-            <th>Page</th>
-            <th>Clicks</th>
-            <th>Impressions</th>
-            <th>CTR</th>
-            <th>Position</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((row, i) => (
-            <tr key={i}>
-              <td>{row.keys[0]}</td>
-              <td>{row.clicks}</td>
-              <td>{row.impressions}</td>
-              <td>{(row.ctr * 100).toFixed(2)}%</td>
-              <td>{row.position.toFixed(2)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+    <>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
+      </div>
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.jsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
 }
 
-export default App;
+export default App
