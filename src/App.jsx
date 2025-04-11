@@ -2,11 +2,13 @@ import React from "react";
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-gray-100 p-6 font-sans">
+    <div className="min-h-screen  p-6 font-sans">
       <header className="bg-white shadow-md p-4 mb-6">
+      <meta name="google-site-verification" content="-_im4fvWCv8ve46RS5dgJGV1hDPW9ypWVKXK5rlgaJE" />
         <h1 className="text-2xl font-semibold text-gray-800">
           Search Console Dashboard
         </h1>
+        <link rel="stylesheets" href="new.css"/>
       </header>
 
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
@@ -31,7 +33,9 @@ export default function Dashboard() {
           <option>Last 90 days</option>
         </select>
       </div>
-
+      <div>
+        <button className="hello">helllo</button>
+      </div>
       <div className="bg-white rounded-2xl shadow-md overflow-x-auto">
         <table className="min-w-full table-auto">
           <thead className="bg-gray-50">
