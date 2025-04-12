@@ -5,7 +5,15 @@ function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/api/data`)
+    // Ensure that the backend URL is fetched from the environment variable
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
+    if (!backendUrl) {
+      console.error('REACT_APP_BACKEND_URL is not defined');
+      return;
+    }
+
+    fetch(`${backendUrl}/api/data`)
       .then(res => res.json())
       .then(data => setData(data || []))
       .catch(err => console.error("Failed to fetch:", err));
