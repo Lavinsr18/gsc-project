@@ -17,6 +17,10 @@ table {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.gsc{
+  color: rgb(40, 135, 199);
+}
+
 th, td {
   padding: 1rem;
   border-bottom: 1px solid #eee;

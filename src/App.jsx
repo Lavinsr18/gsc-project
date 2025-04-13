@@ -5,11 +5,10 @@ function App() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Ensure that the backend URL is fetched from the environment variable
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
     if (!backendUrl) {
-      console.error('REACT_APP_BACKEND_URL is not defined');
+      console.error('VITE_BACKEND_URL is not defined');
       return;
     }
 
