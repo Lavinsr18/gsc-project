@@ -3,6 +3,8 @@ import './App.css';
 
 function App() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -12,11 +14,36 @@ function App() {
       return;
     }
 
+    // Fetch data from the backend
     fetch(`${backendUrl}/api/data`)
-      .then(res => res.json())
-      .then(data => setData(data || []))
-      .catch(err => console.error("Failed to fetch:", err));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setData(data);
+        } else {
+          setError('Data format is incorrect');
+        }
+      })
+      .catch((err) => {
+        setError(`Failed to fetch data: ${err.message}`);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div className="container">
@@ -36,7 +63,7 @@ function App() {
           {data.map((row, i) => (
             <tr key={i}>
               <td>{i + 1}</td>
-              <td>{row.keys[0]}</td>
+              <td>{row.keys ? row.keys[0] : 'N/A'}</td> {/* Handle row.keys safely */}
               <td>{row.clicks}</td>
               <td>{row.impressions}</td>
               <td>{(row.ctr * 100).toFixed(2)}%</td>
